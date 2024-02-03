@@ -16,8 +16,11 @@ var MessagesView = {
 
   render: function(messages) {
     // TODO: Render _all_ the messages.
+    this.$chats.empty();
     // Iterate through array and call renderMessage on each item in array
-    messages.forEach(message => this.renderMessage(message));
+    messages.forEach(message => {
+      this.renderMessage(message);
+    });
   },
 
   renderMessage: function(message) { //message is an object with Username:, text:, roomname:
@@ -25,7 +28,7 @@ var MessagesView = {
     // to give us nodes to append to chats
     var $messageNode = $(MessageView.render(message));
     //append to chats
-    debugger;
+    //debugger;
     this.$chats.append($messageNode);
   },
 
