@@ -8,54 +8,41 @@ var RoomsView = {
   $select: $('#rooms select'),
 
   initialize: function() {
-    // TODO: Perform any work which needs to be done
-    // when this view loads.
-    RoomsView.$button.on('click', this.handleClick);
-    RoomsView.$select.on('click', this.handleChange);
-  },
+
+    RoomsView.$select.on('change', RoomsView.handleChange);
+    RoomsView.$button.on('click', RoomsView.handleClick);
+      },
 
   render: function() {
-    // TODO: Render out the list of rooms.
+
     RoomsView.$select.html('');
-    Rooms.items().each(RoomsView.renderRoom);
+    Rooms
+      .items()
+      .each(RoomsView.renderRoom);
     RoomsView.$select.val(Rooms.selected);
-  },
+      },
 
   renderRoom: function(roomname) {
 
-    // TODO: Render out a single room.
-
-    var $roomNode = $('<option>').val(roomname).text(roomname);
-    // Append room node to options id
-    RoomsView.$select.append($roomNode);
-  },
+    var $option = $('<option>').val(roomname).text(roomname);
+    RoomsView.$select.append($option);
+      },
 
   handleChange: function(event) {
-    // TODO: Handle a user selecting a different room.
-    var selectedRoom = RoomsView.$select.val();
-    //RoomsView.render(Rooms.filterByRoom(selectedRoom));
-    MessagesView.render(Messages.filterByRoom(selectedRoom));
 
-  },
+    Rooms.selected = RoomsView.$select.val();
+    MessagesView.render();
+      },
 
   handleClick: function(event) {
-    // TODO: Handle the user clicking the "Add Room" button.
 
-    var roomName = prompt('Enter new room name: ');
-    if (roomName) {
-      Rooms.add(roomName), () => {
+    var roomname = prompt('Enter room name');
+    if (roomname) {
+      Rooms.add(roomname, () => {
         RoomsView.render();
         MessagesView.render();
-      };
+      });
     }
-    // $('#rooms button').on('click', function() {
-    //   var room = $(this).text();
-    //   Rooms.add(room);
-    // });
-  },
-
-  // roomTemplate: _.template(`
-  //     <option class="roomname"><%- roomname %></option>
-  // `)
+      }
 
 };

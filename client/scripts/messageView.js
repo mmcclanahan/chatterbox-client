@@ -6,10 +6,20 @@ var MessageView = {
   // here: https://underscorejs.org/#template.
   // TODO: Update this template accordingly.
   render: _.template(`
-      <div class="message">
-        <div class="username"><%- username %>:</div>
-        <div class="text"><%- text %></div>
+      <!--
+
+      -->
+      <div class="chat">
+        <div
+          class="username <%= Friends.isFriend(username) ? 'friend' : '' %>"
+          data-username="<%- username %>">
+          <%- username %>
+        </div>
+        <div><%- text %></div>
       </div>
+      <!--
+            -->
     `)
+
 };
 //method to append to messagesView #chats
